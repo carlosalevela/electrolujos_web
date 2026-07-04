@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Chevrolet Aveo Sedán",
+	"brand": "TYC",
+	"vehicleBrand": "Chevrolet",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Chevrolet Aveo Sedán. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-aveo-sedan.jpg",
+	"productType": "espejos"
+}

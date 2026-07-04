@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Chevrolet Corsa",
+	"brand": "TYC",
+	"vehicleBrand": "Chevrolet",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Chevrolet Corsa. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-corsa.jpg",
+	"productType": "espejos"
+}

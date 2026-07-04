@@ -1,0 +1,111 @@
+---
+interface Props {
+	class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class={`relative ${className}`} data-global-search>
+	<div class="relative">
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+			class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-cream-dim"
+		>
+			<circle cx="11" cy="11" r="7" />
+			<path d="m21 21-4.35-4.35" />
+		</svg>
+		<input
+			type="text"
+			data-global-search-input
+			placeholder="Buscar en todo el catálogo..."
+			autocomplete="off"
+			class="w-full border border-graphite-light bg-carbon py-2.5 pl-9 pr-3 font-mono text-xs uppercase tracking-widest text-cream placeholder:text-cream-dim/50 focus:border-amber focus:outline-none"
+		/>
+	</div>
+	<div
+		data-global-search-results
+		class="invisible absolute left-0 right-0 top-full z-50 mt-2 max-h-80 overflow-y-auto border border-graphite-light bg-graphite opacity-0 shadow-xl shadow-black/50"
+	>
+	</div>
+</div>
+
+<script>
+	type SearchItem = { name: string; brand: string; href: string; thumb: string };
+
+	let index: SearchItem[] | null = null;
+	let indexPromise: Promise<SearchItem[]> | null = null;
+
+	function loadIndex(): Promise<SearchItem[]> {
+		if (index) return Promise.resolve(index);
+		if (!indexPromise) {
+			indexPromise = fetch("/search-index.json")
+				.then((res) => res.json())
+				.then((data: SearchItem[]) => {
+					index = data;
+					return data;
+				});
+		}
+		return indexPromise;
+	}
+
+	document.querySelectorAll<HTMLElement>("[data-global-search]").forEach((wrapper) => {
+		const input = wrapper.querySelector<HTMLInputElement>("[data-global-search-input]");
+		const resultsBox = wrapper.querySelector<HTMLElement>("[data-global-search-results]");
+		if (!input || !resultsBox) return;
+
+		function showResults(items: SearchItem[]) {
+			if (!resultsBox) return;
+			if (items.length === 0) {
+				resultsBox.innerHTML =
+					'<p class="px-4 py-3 font-mono text-[11px] uppercase tracking-widest text-cream-dim">Sin resultados</p>';
+			} else {
+				resultsBox.innerHTML = items
+					.slice(0, 8)
+					.map(
+						(item) => `
+						<a href="${item.href}?q=${encodeURIComponent(item.name)}" class="flex items-center gap-3 border-b border-graphite-light/60 px-4 py-2.5 font-mono text-[11px] uppercase tracking-widest text-cream-dim transition last:border-b-0 hover:bg-graphite-light hover:text-white">
+							<img src="${item.thumb}" alt="" class="h-8 w-8 flex-shrink-0 rounded-sm bg-white object-contain" />
+							<span class="flex-1">${item.name}</span>
+							<span class="shrink-0 text-amber opacity-70">${item.brand}</span>
+						</a>`
+					)
+					.join("");
+			}
+			resultsBox.classList.remove("invisible", "opacity-0");
+		}
+
+		function hideResults() {
+			resultsBox?.classList.add("invisible", "opacity-0");
+		}
+
+		input.addEventListener("input", () => {
+			const query = input.value.trim().toLowerCase();
+			if (query.length < 2) {
+				hideResults();
+				return;
+			}
+			loadIndex().then((items) => {
+				const matches = items.filter(
+					(item) => item.name.toLowerCase().includes(query) || item.brand.toLowerCase().includes(query)
+				);
+				showResults(matches);
+			});
+		});
+
+		input.addEventListener("focus", () => {
+			if (input.value.trim().length >= 2) input.dispatchEvent(new Event("input"));
+		});
+
+		document.addEventListener("click", (e) => {
+			if (!wrapper.contains(e.target as Node)) hideResults();
+		});
+	});
+</script>

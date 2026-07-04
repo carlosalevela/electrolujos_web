@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Chevrolet Tracker",
+	"brand": "TYC",
+	"vehicleBrand": "Chevrolet",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Chevrolet Tracker. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-tracker.jpg",
+	"productType": "espejos"
+}

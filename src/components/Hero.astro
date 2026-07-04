@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import heroGarage from "../assets/hero-garage.png";
+
+const whatsappNumber = "573116001851";
+const whatsappMessage = encodeURIComponent(
+	"Hola Electrolujos, quiero más información sobre sus repuestos."
+);
+---
+
+<section id="inicio" class="relative overflow-hidden border-b-2 border-graphite-light bg-carbon">
+	<div class="absolute inset-0">
+		<Image
+			src={heroGarage}
+			alt="Garage de Electrolujos"
+			width={1376}
+			height={768}
+			class="h-full w-full object-cover"
+			loading="eager"
+			fetchpriority="high"
+		/>
+	</div>
+	<div class="absolute inset-0 bg-gradient-to-r from-carbon via-carbon/80 to-carbon/30"></div>
+	<div class="absolute inset-0 bg-gradient-to-t from-carbon via-transparent to-carbon/40"></div>
+
+	<div class="relative mx-auto max-w-6xl px-5 py-24 md:px-margin-desktop md:py-36">
+		<span
+			class="chrome-bezel inline-block bg-amber px-3 py-1 font-mono text-xs font-semibold uppercase tracking-widest text-carbon"
+		>
+			Repuestos · Eléctrico · Accesorios
+		</span>
+
+		<p class="mt-4 font-mono text-xs uppercase tracking-[0.2em] text-amber">La Bodega de los Espejos</p>
+
+		<h1 class="mt-2 max-w-2xl font-heading text-4xl font-extrabold uppercase italic leading-[1.05] text-white sm:text-5xl md:text-6xl">
+			Todo para tu vehículo, <br />
+			<span class="text-red">en un solo lugar.</span>
+		</h1>
+		<p class="mt-6 max-w-xl border-l-4 border-amber pl-6 font-body text-lg text-cream-dim">
+			Cableado, fusibles, bombillería, exploradoras e instalaciones eléctricas. Además espejos,
+			plumillas, manijas, tapetes y accesorios. En Pasto, listos para atenderte.
+		</p>
+
+		<div class="mt-10 flex flex-wrap gap-6">
+			<a
+				href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="chrome-bezel primary-glow bg-red px-10 py-4 font-heading font-bold uppercase tracking-wide text-white transition hover:bg-red-dark"
+			>
+				Escríbenos por WhatsApp
+			</a>
+			<a
+				href="#ubicacion"
+				class="border-2 border-amber px-10 py-4 font-heading font-bold uppercase tracking-wide text-amber transition hover:bg-amber/10"
+			>
+				Ver ubicación
+			</a>
+		</div>
+
+		<div class="mt-16 hidden items-end gap-2 md:flex">
+			<div class="flex gap-1">
+				<div class="h-8 w-2 bg-amber"></div>
+				<div class="h-8 w-2 bg-amber"></div>
+				<div class="h-8 w-2 bg-amber"></div>
+				<div class="h-8 w-2 bg-amber/30"></div>
+				<div class="h-8 w-2 bg-amber/30"></div>
+			</div>
+			<span class="font-mono text-xs uppercase tracking-widest text-amber">Stock disponible</span>
+		</div>
+	</div>
+</section>

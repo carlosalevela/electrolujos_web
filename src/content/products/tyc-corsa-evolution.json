@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Chevrolet Corsa Evolution",
+	"brand": "TYC",
+	"vehicleBrand": "Chevrolet",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Chevrolet Corsa Evolution. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-corsa-evolution.jpg",
+	"productType": "espejos"
+}

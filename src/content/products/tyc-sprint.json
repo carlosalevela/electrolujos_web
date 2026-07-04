@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Chevrolet Sprint",
+	"brand": "TYC",
+	"vehicleBrand": "Chevrolet",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Chevrolet Sprint. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-sprint.jpg",
+	"productType": "espejos"
+}

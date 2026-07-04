@@ -1,0 +1,97 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import WhatsAppFloat from "../../../components/WhatsAppFloat.astro";
+import CatalogSidebar from "../../../components/CatalogSidebar.astro";
+import ProductFilterGrid from "../../../components/ProductFilterGrid.astro";
+import Breadcrumbs from "../../../components/Breadcrumbs.astro";
+import { buildSidebar } from "../../../lib/catalog";
+
+const labels: Record<string, string> = {
+	tapetes: "Tapetes",
+	tejas: "Tejas",
+	"seguros-espejo": "Seguros de Espejo",
+	cornetas: "Cornetas",
+	radios: "Radios",
+	alarmas: "Alarmas",
+	silicona: "Silicona",
+	cera: "Cera",
+	aromatizantes: "Aromatizantes",
+	llaveros: "Llaveros",
+	"kit-carretera": "Kit de carretera",
+	"soporte-celular": "Soporte celular",
+	"queso-taxi": "Queso taxi",
+	"cargador-celular": "Cargador celular",
+};
+
+export async function getStaticPaths() {
+	const allProducts = await getCollection("products");
+	const ids = [
+		"tapetes",
+		"tejas",
+		"seguros-espejo",
+		"cornetas",
+		"radios",
+		"alarmas",
+		"silicona",
+		"cera",
+		"aromatizantes",
+		"llaveros",
+		"kit-carretera",
+		"soporte-celular",
+		"queso-taxi",
+		"cargador-celular",
+	];
+	return ids
+		.filter((id) => allProducts.some((p) => p.data.category === "accesorios" && p.data.productType === id))
+		.map((id) => ({ params: { subcategory: id } }));
+}
+
+const allProducts = await getCollection("products");
+const activeSubcategory = Astro.params.subcategory as string;
+const activeSubcategoryLabel = labels[activeSubcategory] ?? "";
+const products = allProducts.filter(
+	(p) => p.data.category === "accesorios" && p.data.productType === activeSubcategory
+);
+const sections = buildSidebar(allProducts, "accesorios", activeSubcategory);
+---
+
+<Layout
+	title={`${activeSubcategoryLabel} | Accesorios | Electrolujos`}
+	description={`Catálogo de ${activeSubcategoryLabel.toLowerCase()} disponibles en Electrolujos, Pasto.`}
+>
+	<Header />
+	<main class="bg-carbon px-5 py-16 md:px-margin-desktop">
+		<div class="mx-auto max-w-6xl">
+			<Breadcrumbs
+				items={[
+					{ label: "Inicio", href: "/" },
+					{ label: "Productos", href: "/productos" },
+					{ label: "Accesorios", href: "/productos/accesorios" },
+					{ label: activeSubcategoryLabel },
+				]}
+			/>
+			<div class="bezel-top mb-12 pt-4">
+				<h1 class="font-heading text-3xl font-extrabold uppercase italic tracking-tight text-white sm:text-4xl">
+					Accesorios · {activeSubcategoryLabel}
+				</h1>
+				<p class="mt-2 font-mono text-xs uppercase tracking-widest text-cream-dim">
+					Marcas y referencias disponibles en tienda
+				</p>
+			</div>
+
+			<div class="grid gap-gutter md:grid-cols-[220px_1fr]">
+				<div class="order-2 md:order-1">
+					<CatalogSidebar sections={sections} />
+				</div>
+				<div class="order-1 md:order-2">
+					<ProductFilterGrid products={products} />
+				</div>
+			</div>
+		</div>
+	</main>
+	<Footer />
+	<WhatsAppFloat />
+</Layout>

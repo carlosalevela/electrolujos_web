@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Ford Fiesta",
+	"brand": "TYC",
+	"vehicleBrand": "Ford",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Ford Fiesta. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-ford-fiesta.jpg",
+	"productType": "espejos"
+}

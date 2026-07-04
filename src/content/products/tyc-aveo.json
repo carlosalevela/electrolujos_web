@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Chevrolet Aveo",
+	"brand": "TYC",
+	"vehicleBrand": "Chevrolet",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Chevrolet Aveo. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-aveo.jpg",
+	"productType": "espejos"
+}

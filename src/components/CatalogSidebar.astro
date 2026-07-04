@@ -1,0 +1,108 @@
+---
+import type { SidebarSection } from "../lib/catalog";
+
+interface Props {
+	sections: SidebarSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+<aside class="h-fit md:sticky md:top-24">
+	<nav class="flex flex-col gap-2">
+		{
+			sections.map((section) => (
+				<div>
+					{section.count > 0 ? (
+						section.subitems ? (
+							<button
+								type="button"
+								data-toggle-submenu
+								aria-expanded={section.active ? "true" : "false"}
+								class={
+									section.active
+										? "chrome-bezel flex w-full items-center justify-between gap-3 bg-red px-4 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white"
+										: "flex w-full items-center justify-between gap-3 border border-graphite-light px-4 py-3 font-mono text-xs uppercase tracking-widest text-cream-dim transition hover:border-red hover:text-white"
+								}
+							>
+								<span class="flex items-center gap-2">
+									{section.label}
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+										class={`h-3 w-3 transition-transform ${section.active ? "rotate-180" : ""}`}
+									>
+										<path d="m6 9 6 6 6-6" />
+									</svg>
+								</span>
+								<span class="font-mono text-[10px] opacity-70">{section.count}</span>
+							</button>
+						) : (
+							<a
+								href={section.href}
+								class={
+									section.active
+										? "chrome-bezel flex items-center justify-between gap-3 bg-red px-4 py-3 font-mono text-xs font-semibold uppercase tracking-widest text-white"
+										: "flex items-center justify-between gap-3 border border-graphite-light px-4 py-3 font-mono text-xs uppercase tracking-widest text-cream-dim transition hover:border-red hover:text-white"
+								}
+							>
+								{section.label}
+								<span class="font-mono text-[10px] opacity-70">{section.count}</span>
+							</a>
+						)
+					) : (
+						<span class="flex items-center justify-between gap-3 border border-graphite-light px-4 py-3 font-mono text-xs uppercase tracking-widest text-cream-dim/50">
+							{section.label}
+							<span class="font-mono text-[10px]">Pronto</span>
+						</span>
+					)}
+
+					{section.subitems && (
+						<div class={section.active ? "mt-2 flex flex-col gap-1.5 border-l border-graphite-light pl-4" : "hidden flex-col gap-1.5 border-l border-graphite-light pl-4 mt-2"}>
+							{section.subitems.map((sub) =>
+								sub.count > 0 ? (
+									<a
+										href={sub.href}
+										class={
+											sub.active
+												? "flex items-center justify-between gap-3 font-mono text-[11px] font-semibold uppercase tracking-widest text-amber"
+												: "flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-widest text-cream-dim transition hover:text-white"
+										}
+									>
+										{sub.label}
+										<span class="opacity-70">{sub.count}</span>
+									</a>
+								) : (
+									<span class="flex items-center justify-between gap-3 font-mono text-[11px] uppercase tracking-widest text-cream-dim/40">
+										{sub.label}
+										<span>Pronto</span>
+									</span>
+								)
+							)}
+						</div>
+					)}
+				</div>
+			))
+		}
+	</nav>
+</aside>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>("[data-toggle-submenu]").forEach((btn) => {
+		btn.addEventListener("click", () => {
+			const panel = btn.parentElement?.querySelector<HTMLElement>(":scope > div:last-child");
+			const chevron = btn.querySelector("svg");
+			const nowHidden = panel?.classList.toggle("hidden");
+			const nowExpanded = !nowHidden;
+			panel?.classList.toggle("mt-2", nowExpanded);
+			chevron?.classList.toggle("rotate-180", nowExpanded);
+			btn.setAttribute("aria-expanded", String(nowExpanded));
+		});
+	});
+</script>

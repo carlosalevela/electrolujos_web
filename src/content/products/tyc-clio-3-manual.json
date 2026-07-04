@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Renault Clio 3 Manual",
+	"brand": "TYC",
+	"vehicleBrand": "Renault",
+	"category": "repuestos",
+	"description": "Espejo retrovisor manual para Renault Clio 3. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-clio-3-manual.jpg",
+	"productType": "espejos"
+}

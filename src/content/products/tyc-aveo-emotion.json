@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Chevrolet Aveo Emotion",
+	"brand": "TYC",
+	"vehicleBrand": "Chevrolet",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Chevrolet Aveo Emotion. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-aveo-emotion.jpg",
+	"productType": "espejos"
+}

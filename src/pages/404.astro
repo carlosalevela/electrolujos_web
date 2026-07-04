@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+---
+
+<Layout title="Página no encontrada | Electrolujos" description="La página que buscas no existe.">
+	<Header />
+	<main class="flex min-h-[60vh] items-center justify-center bg-carbon px-5 py-24 text-center md:px-margin-desktop">
+		<div class="mx-auto max-w-lg">
+			<span
+				class="chrome-bezel inline-block bg-amber px-3 py-1 font-mono text-xs font-semibold uppercase tracking-widest text-carbon"
+			>
+				Error 404
+			</span>
+			<h1 class="mt-6 font-heading text-4xl font-extrabold uppercase italic leading-tight text-white sm:text-5xl">
+				Página <span class="text-red">no encontrada.</span>
+			</h1>
+			<p class="mt-6 text-cream-dim">
+				Puede que el enlace esté roto o la página ya no exista. Prueba buscando lo que necesitas o vuelve al inicio.
+			</p>
+
+			<div class="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+				<a
+					href="/"
+					class="chrome-bezel bg-red px-8 py-3 font-heading font-bold uppercase tracking-wide text-white transition hover:bg-red-dark"
+				>
+					Ir al inicio
+				</a>
+				<a
+					href="/productos"
+					class="border-2 border-amber px-8 py-3 font-heading font-bold uppercase tracking-wide text-amber transition hover:bg-amber/10"
+				>
+					Ver catálogo
+				</a>
+			</div>
+		</div>
+	</main>
+	<Footer />
+	<WhatsAppFloat />
+</Layout>

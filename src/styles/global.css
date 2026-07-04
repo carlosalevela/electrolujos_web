@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+	--color-carbon: #121414;
+	--color-graphite: #1a1c1c;
+	--color-graphite-light: #282a2b;
+	--color-graphite-lowest: #0d0e0f;
+	--color-red: #b11e23;
+	--color-red-dark: #7a1418;
+	--color-amber: #fdb813;
+	--color-amber-dark: #d99e00;
+	--color-chrome: #9ea3a3;
+	--color-chrome-light: #e5e5e5;
+	--color-cream: #e2e2e2;
+	--color-cream-dim: #a8a8a8;
+
+	--font-heading: "Anybody", sans-serif;
+	--font-body: "Hanken Grotesk", sans-serif;
+	--font-mono: "JetBrains Mono", monospace;
+
+	--spacing-gutter: 24px;
+	--spacing-margin-desktop: 64px;
+	--spacing-margin-mobile: 20px;
+	--spacing-panel-padding: 32px;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+.chrome-bezel {
+	border: 2px solid;
+	border-image-source: linear-gradient(135deg, var(--color-chrome-light) 0%, var(--color-chrome) 50%, #333333 100%);
+	border-image-slice: 1;
+}
+
+.industrial-card {
+	background: linear-gradient(145deg, var(--color-graphite), var(--color-carbon));
+	position: relative;
+	overflow: hidden;
+}
+
+.industrial-card::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 4px;
+	height: 24px;
+	background-color: var(--color-red);
+}
+
+.hud-scanline {
+	background: linear-gradient(to bottom, transparent 50%, rgba(253, 184, 19, 0.05) 50%);
+	background-size: 100% 4px;
+}
+
+.primary-glow:hover {
+	box-shadow: inset 0 0 15px var(--color-amber);
+}
+
+.bezel-top {
+	position: relative;
+}
+
+.bezel-top::before {
+	content: "";
+	position: absolute;
+	top: -2px;
+	left: 0;
+	width: 40px;
+	height: 4px;
+	background: var(--color-red);
+}
+
+.segmented-progress span {
+	height: 4px;
+	width: 8px;
+	background: var(--color-amber);
+	display: inline-block;
+	margin-right: 2px;
+}
+
+.segmented-progress span.inactive {
+	background: var(--color-graphite-light);
+}

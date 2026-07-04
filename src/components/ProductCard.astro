@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	product: CollectionEntry<"products">;
+	priority?: boolean;
+}
+
+const whatsappNumber = "573116001851";
+
+const { product, priority = false } = Astro.props;
+const { name, brand, vehicleBrand, description, image } = product.data;
+const filterBrand = vehicleBrand ?? brand;
+const whatsappMessage = encodeURIComponent(`Hola Electrolujos, quiero información sobre: ${name}`);
+---
+
+<div
+	class="industrial-card flex flex-col border border-graphite-light/60 p-5 transition-colors hover:border-red"
+	data-product-card
+	data-name={name.toLowerCase()}
+	data-brand={filterBrand}
+>
+	<div class="chrome-bezel overflow-hidden bg-white">
+		<Image
+			src={image}
+			alt={name}
+			width={400}
+			height={400}
+			class="aspect-square w-full object-contain"
+			loading={priority ? "eager" : "lazy"}
+			fetchpriority={priority ? "high" : "auto"}
+		/>
+	</div>
+	<div class="mt-4 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+		<h3 class="font-heading text-lg font-bold uppercase text-white">{name}</h3>
+		<span class="font-mono text-[10px] uppercase tracking-widest text-amber">{brand}</span>
+	</div>
+	<p class="mt-2 flex-1 text-sm text-cream-dim">{description}</p>
+
+	<a
+		href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="mt-4 flex items-center justify-center gap-2 border border-red px-3 py-2.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-red transition hover:bg-red hover:text-white"
+	>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-3.5 w-3.5">
+			<path
+				d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.85 9.85 0 0 0 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.22 8.22 0 0 1-1.26-4.35c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 0 1 2.42 5.83c0 4.55-3.7 8.24-8.25 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.4-.12-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.84-.86 2.04 0 1.2.88 2.37 1 2.53.12.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"
+			/>
+		</svg>
+		Preguntar por este producto
+	</a>
+</div>

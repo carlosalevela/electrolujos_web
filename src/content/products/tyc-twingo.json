@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Renault Twingo",
+	"brand": "TYC",
+	"vehicleBrand": "Renault",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Renault Twingo. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-twingo.jpg",
+	"productType": "espejos"
+}

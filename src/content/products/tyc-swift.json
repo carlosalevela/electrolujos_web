@@ -1,0 +1,9 @@
+{
+	"name": "Espejo Suzuki Swift",
+	"brand": "TYC",
+	"vehicleBrand": "Suzuki",
+	"category": "repuestos",
+	"description": "Espejo retrovisor para Suzuki Swift. Disponible en lado izquierdo y derecho.",
+	"image": "../../assets/products/tyc-swift.jpg",
+	"productType": "espejos"
+}

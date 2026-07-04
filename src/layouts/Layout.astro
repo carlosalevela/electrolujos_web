@@ -1,0 +1,78 @@
+---
+import "../styles/global.css";
+import { getImage } from "astro:assets";
+import heroGarage from "../assets/hero-garage.png";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = "Electrolujos | Repuestos eléctricos y accesorios para carro en Pasto",
+	description = "Repuestos eléctricos, bombillería, cableado, fusibles y accesorios para tu carro en Pasto. Calle 15, Nariño.",
+} = Astro.props;
+
+const ogImage = await getImage({ src: heroGarage, width: 1200, height: 630 });
+const ogImageUrl = new URL(ogImage.src, Astro.site ?? Astro.url.origin).toString();
+const pageUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
+
+const businessSchema = {
+	"@context": "https://schema.org",
+	"@type": "AutoPartsStore",
+	name: "Electrolujos",
+	image: ogImageUrl,
+	telephone: "+573116001851",
+	address: {
+		"@type": "PostalAddress",
+		streetAddress: "Calle 15",
+		addressLocality: "Pasto",
+		addressRegion: "Nariño",
+		addressCountry: "CO",
+	},
+	openingHoursSpecification: {
+		"@type": "OpeningHoursSpecification",
+		dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		opens: "08:30",
+		closes: "18:00",
+	},
+	url: pageUrl,
+};
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="canonical" href={pageUrl} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Electrolujos" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImageUrl} />
+		<meta property="og:url" content={pageUrl} />
+		<meta property="og:locale" content="es_CO" />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageUrl} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} is:inline />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Anybody:ital,wght@0,400..900;1,400..900&family=Hanken+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap"
+			rel="stylesheet"
+		/>
+		<title>{title}</title>
+	</head>
+	<body class="bg-carbon font-body text-cream antialiased">
+		<slot />
+	</body>
+</html>
