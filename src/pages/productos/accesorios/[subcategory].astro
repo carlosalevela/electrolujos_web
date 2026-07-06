@@ -5,9 +5,11 @@ import Header from "../../../components/Header.astro";
 import Footer from "../../../components/Footer.astro";
 import WhatsAppFloat from "../../../components/WhatsAppFloat.astro";
 import CatalogSidebar from "../../../components/CatalogSidebar.astro";
+import CatalogMobileNav from "../../../components/CatalogMobileNav.astro";
 import ProductFilterGrid from "../../../components/ProductFilterGrid.astro";
 import Breadcrumbs from "../../../components/Breadcrumbs.astro";
 import { buildSidebar } from "../../../lib/catalog";
+import { categoryTitle, categoryDescription, categoryIntro } from "../../../lib/seo";
 
 const labels: Record<string, string> = {
 	tapetes: "Tapetes",
@@ -59,8 +61,8 @@ const sections = buildSidebar(allProducts, "accesorios", activeSubcategory);
 ---
 
 <Layout
-	title={`${activeSubcategoryLabel} | Accesorios | Electrolujos`}
-	description={`Catálogo de ${activeSubcategoryLabel.toLowerCase()} disponibles en Electrolujos, Pasto.`}
+	title={categoryTitle(activeSubcategoryLabel)}
+	description={categoryDescription(activeSubcategoryLabel)}
 >
 	<Header />
 	<main class="bg-carbon px-5 py-16 md:px-margin-desktop">
@@ -80,13 +82,16 @@ const sections = buildSidebar(allProducts, "accesorios", activeSubcategory);
 				<p class="mt-2 font-mono text-xs uppercase tracking-widest text-cream-dim">
 					Marcas y referencias disponibles en tienda
 				</p>
+				<p class="mt-4 max-w-2xl font-body text-cream-dim">
+					{categoryIntro(activeSubcategoryLabel, "accesorios")}
+				</p>
 			</div>
 
+			<CatalogMobileNav sections={sections} />
+
 			<div class="grid gap-gutter md:grid-cols-[220px_1fr]">
-				<div class="order-2 md:order-1">
-					<CatalogSidebar sections={sections} />
-				</div>
-				<div class="order-1 md:order-2">
+				<CatalogSidebar sections={sections} />
+				<div>
 					<ProductFilterGrid products={products} />
 				</div>
 			</div>

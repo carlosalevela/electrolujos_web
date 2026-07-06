@@ -1,0 +1,7 @@
+{
+	"redirects": [
+		{ "source": "/productos", "destination": "/productos/bombilleria-led", "permanent": false },
+		{ "source": "/productos/repuestos", "destination": "/productos/repuestos/espejos", "permanent": false },
+		{ "source": "/productos/accesorios", "destination": "/productos/accesorios/tapetes", "permanent": false }
+	]
+}

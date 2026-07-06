@@ -84,3 +84,12 @@ html {
 .segmented-progress span.inactive {
 	background: var(--color-graphite-light);
 }
+
+.no-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}

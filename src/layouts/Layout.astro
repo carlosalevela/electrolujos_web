@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-	title = "Electrolujos | Repuestos eléctricos y accesorios para carro en Pasto",
-	description = "Repuestos eléctricos, bombillería, cableado, fusibles y accesorios para tu carro en Pasto. Calle 15, Nariño.",
+	title = "Electrolujos | Repuestos, Espejos y Accesorios para Carro en Pasto, Nariño",
+	description = "Repuestos eléctricos, espejos retrovisores, bombillería, tejas y accesorios para tu carro en Pasto, Nariño. La Bodega de los Espejos — Calle 15, atención de lunes a sábado.",
 } = Astro.props;
 
 const ogImage = await getImage({ src: heroGarage, width: 1200, height: 630 });
@@ -23,6 +23,7 @@ const businessSchema = {
 	name: "Electrolujos",
 	image: ogImageUrl,
 	telephone: "+573116001851",
+	priceRange: "$$",
 	address: {
 		"@type": "PostalAddress",
 		streetAddress: "Calle 15",
@@ -48,6 +49,9 @@ const businessSchema = {
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="canonical" href={pageUrl} />
+
+		{/* TODO: pegar aquí el meta tag de verificación que da Google Search Console, ej: */}
+		{/* <meta name="google-site-verification" content="TU_CODIGO_AQUI" /> */}
 
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Electrolujos" />

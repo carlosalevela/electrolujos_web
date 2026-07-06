@@ -8,7 +8,7 @@ interface Props {
 const { sections } = Astro.props;
 ---
 
-<aside class="h-fit md:sticky md:top-24">
+<aside class="hidden h-fit md:block md:sticky md:top-24">
 	<nav class="flex flex-col gap-2">
 		{
 			sections.map((section) => (

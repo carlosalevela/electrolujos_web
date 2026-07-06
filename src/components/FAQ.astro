@@ -1,0 +1,80 @@
+---
+const faqs = [
+	{
+		question: "¿Hacen instalación de los repuestos y accesorios?",
+		answer:
+			"Sí, en Electrolujos instalamos espejos, bombillería, alarmas, radios y la mayoría de accesorios que vendemos, directamente en el local.",
+	},
+	{
+		question: "¿Qué marcas de carro manejan?",
+		answer:
+			"Manejamos repuestos y accesorios compatibles con las marcas más comunes en Colombia: Chevrolet, Renault, Mazda, Toyota, Kia, Hyundai, entre otras. Escríbenos con la referencia de tu carro y te confirmamos disponibilidad.",
+	},
+	{
+		question: "¿Dónde están ubicados en Pasto?",
+		answer:
+			"Estamos en la Calle 15, en Pasto, Nariño — somos La Bodega de los Espejos. Puedes ver el mapa y cómo llegar en la sección de ubicación de esta página.",
+	},
+	{
+		question: "¿Cuál es el horario de atención?",
+		answer: "Atendemos de lunes a sábado, de 8:30 a.m. a 6:00 p.m.",
+	},
+	{
+		question: "¿Puedo consultar disponibilidad de un repuesto antes de ir?",
+		answer:
+			"Claro, escríbenos por WhatsApp al 311 600 1851 con la referencia o el modelo de tu carro y te confirmamos si tenemos el producto en stock.",
+	},
+];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: faqs.map((faq) => ({
+		"@type": "Question",
+		name: faq.question,
+		acceptedAnswer: {
+			"@type": "Answer",
+			text: faq.answer,
+		},
+	})),
+};
+---
+
+<section id="preguntas-frecuentes" class="bg-carbon px-5 py-20 md:px-margin-desktop">
+	<div class="mx-auto max-w-3xl">
+		<div class="bezel-top mb-12 pt-4">
+			<h2 class="font-heading text-3xl font-extrabold uppercase italic tracking-tight text-white sm:text-4xl">
+				Preguntas frecuentes
+			</h2>
+			<div class="mt-4 h-2 w-32 bg-amber"></div>
+		</div>
+
+		<div class="flex flex-col gap-4">
+			{
+				faqs.map((faq) => (
+					<details class="industrial-card group border border-graphite-light/60 p-6 open:border-amber/50">
+						<summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-heading text-base font-bold uppercase tracking-tight text-white marker:content-none sm:text-lg">
+							{faq.question}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+								class="h-5 w-5 flex-shrink-0 text-amber transition group-open:rotate-45"
+							>
+								<path d="M12 5v14M5 12h14" />
+							</svg>
+						</summary>
+						<p class="mt-4 font-body text-cream-dim">{faq.answer}</p>
+					</details>
+				))
+			}
+		</div>
+	</div>
+
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} is:inline />
+</section>

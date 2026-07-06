@@ -5,9 +5,11 @@ import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import WhatsAppFloat from "../../components/WhatsAppFloat.astro";
 import CatalogSidebar from "../../components/CatalogSidebar.astro";
+import CatalogMobileNav from "../../components/CatalogMobileNav.astro";
 import ProductFilterGrid from "../../components/ProductFilterGrid.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { buildSidebar } from "../../lib/catalog";
+import { categoryTitle, categoryDescription, categoryIntro } from "../../lib/seo";
 
 const labels: Record<string, string> = {
 	"bombilleria-led": "Bombillería LED",
@@ -28,8 +30,8 @@ const sections = buildSidebar(allProducts, activeCategory);
 ---
 
 <Layout
-	title={`${activeCategoryLabel} | Electrolujos`}
-	description={`Catálogo de ${activeCategoryLabel.toLowerCase()} disponible en Electrolujos, Pasto.`}
+	title={categoryTitle(activeCategoryLabel)}
+	description={categoryDescription(activeCategoryLabel)}
 >
 	<Header />
 	<main class="bg-carbon px-5 py-16 md:px-margin-desktop">
@@ -42,13 +44,16 @@ const sections = buildSidebar(allProducts, activeCategory);
 				<p class="mt-2 font-mono text-xs uppercase tracking-widest text-cream-dim">
 					Marcas y referencias disponibles en tienda
 				</p>
+				<p class="mt-4 max-w-2xl font-body text-cream-dim">
+					{categoryIntro(activeCategoryLabel, "bombilleria")}
+				</p>
 			</div>
 
+			<CatalogMobileNav sections={sections} />
+
 			<div class="grid gap-gutter md:grid-cols-[220px_1fr]">
-				<div class="order-2 md:order-1">
-					<CatalogSidebar sections={sections} />
-				</div>
-				<div class="order-1 md:order-2">
+				<CatalogSidebar sections={sections} />
+				<div>
 					<ProductFilterGrid products={products} />
 				</div>
 			</div>
