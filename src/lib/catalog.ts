@@ -25,6 +25,14 @@ const accesoriosSubcategories = [
 	{ id: "cargador-celular", label: "Cargador celular" },
 ] as const;
 
+export function productUrl(product: CollectionEntry<"products">): string {
+	const { category, productType } = product.data;
+	if (category === "bombilleria-led" || category === "bombilleria-halogena") {
+		return `/productos/${category}/${product.id}`;
+	}
+	return `/productos/${category}/${productType}/${product.id}`;
+}
+
 export type SidebarItem = {
 	id: string;
 	label: string;

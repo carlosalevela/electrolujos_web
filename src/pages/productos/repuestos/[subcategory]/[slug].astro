@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
+import WhatsAppFloat from "../../../../components/WhatsAppFloat.astro";
+import ProductDetail from "../../../../components/ProductDetail.astro";
+import { productTitle, productDescription } from "../../../../lib/seo";
+
+const labels: Record<string, string> = {
+	espejos: "Espejos",
+	plumillas: "Plumillas",
+	exploradoras: "Exploradoras",
+	farolas: "Farolas",
+	stops: "Stops",
+};
+
+export async function getStaticPaths() {
+	const allProducts = await getCollection("products");
+	return allProducts
+		.filter((p) => p.data.category === "repuestos" && p.data.productType)
+		.map((p) => ({
+			params: { subcategory: p.data.productType, slug: p.id },
+			props: { product: p },
+		}));
+}
+
+const { product } = Astro.props;
+const activeSubcategory = Astro.params.subcategory as string;
+const activeSubcategoryLabel = labels[activeSubcategory] ?? "";
+
+const allProducts = await getCollection("products");
+const related = allProducts
+	.filter(
+		(p) =>
+			p.data.category === "repuestos" &&
+			p.data.productType === activeSubcategory &&
+			p.id !== product.id
+	)
+	.slice(0, 4);
+---
+
+<Layout
+	title={productTitle(product.data.name)}
+	description={productDescription(product.data.description, product.data.brand, product.data.vehicleBrand)}
+>
+	<Header />
+	<main class="bg-carbon px-5 py-16 md:px-margin-desktop">
+		<div class="mx-auto max-w-6xl">
+			<ProductDetail
+				product={product}
+				breadcrumbItems={[
+					{ label: "Inicio", href: "/" },
+					{ label: "Productos", href: "/productos" },
+					{ label: "Repuestos", href: "/productos/repuestos" },
+					{ label: activeSubcategoryLabel, href: `/productos/repuestos/${activeSubcategory}` },
+					{ label: product.data.name },
+				]}
+				backHref={`/productos/repuestos/${activeSubcategory}`}
+				backLabel={`Volver a ${activeSubcategoryLabel}`}
+				related={related}
+			/>
+		</div>
+	</main>
+	<Footer />
+	<WhatsAppFloat />
+</Layout>

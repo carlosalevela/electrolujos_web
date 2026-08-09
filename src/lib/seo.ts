@@ -6,6 +6,19 @@ export function categoryDescription(label: string): string {
 	return `${label} para tu vehículo en Pasto, Nariño. Encuéntralos en Electrolujos, La Bodega de los Espejos — repuestos y accesorios para carro con entrega e instalación.`;
 }
 
+export function productTitle(name: string): string {
+	return `${name} en Pasto, Nariño | Electrolujos`;
+}
+
+export function productDescription(
+	description: string,
+	brand: string,
+	vehicleBrand?: string
+): string {
+	const compat = vehicleBrand ? ` Compatible con vehículos ${vehicleBrand}.` : "";
+	return `${description} Marca ${brand}.${compat} Disponible en Electrolujos, Pasto, Nariño — consulta precio y disponibilidad por WhatsApp.`;
+}
+
 type CategoryGroup = "repuestos" | "accesorios" | "bombilleria";
 
 export function categoryIntro(label: string, group: CategoryGroup): string {

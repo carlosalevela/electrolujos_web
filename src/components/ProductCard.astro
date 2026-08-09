@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
+import { productUrl } from "../lib/catalog";
 
 interface Props {
 	product: CollectionEntry<"products">;
@@ -12,6 +13,7 @@ const whatsappNumber = "573116001851";
 const { product, priority = false } = Astro.props;
 const { name, brand, vehicleBrand, description, image } = product.data;
 const filterBrand = vehicleBrand ?? brand;
+const href = productUrl(product);
 const whatsappMessage = encodeURIComponent(`Hola Electrolujos, quiero informaciÃ³n sobre: ${name}`);
 ---
 
@@ -21,7 +23,7 @@ const whatsappMessage = encodeURIComponent(`Hola Electrolujos, quiero informaciÃ
 	data-name={name.toLowerCase()}
 	data-brand={filterBrand}
 >
-	<div class="chrome-bezel overflow-hidden bg-white">
+	<a href={href} class="chrome-bezel block overflow-hidden bg-white">
 		<Image
 			src={image}
 			alt={name}
@@ -31,9 +33,11 @@ const whatsappMessage = encodeURIComponent(`Hola Electrolujos, quiero informaciÃ
 			loading={priority ? "eager" : "lazy"}
 			fetchpriority={priority ? "high" : "auto"}
 		/>
-	</div>
+	</a>
 	<div class="mt-4 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-		<h3 class="font-heading text-lg font-bold uppercase text-white">{name}</h3>
+		<h3 class="font-heading text-lg font-bold uppercase text-white">
+			<a href={href} class="transition hover:text-amber">{name}</a>
+		</h3>
 		<span class="font-mono text-[10px] uppercase tracking-widest text-amber">{brand}</span>
 	</div>
 	<p class="mt-2 flex-1 text-sm text-cream-dim">{description}</p>
