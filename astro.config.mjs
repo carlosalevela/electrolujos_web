@@ -14,5 +14,10 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [sitemap()]
+  integrations: [
+    sitemap({
+      // /productos redirige de inmediato a /productos/bombilleria-led, no debe listarse como página indexable
+      filter: (page) => page !== 'https://electrolujos.vercel.app/productos/',
+    }),
+  ]
 });
