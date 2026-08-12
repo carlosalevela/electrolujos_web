@@ -1,5 +1,5 @@
 ---
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ProductCard from "./ProductCard.astro";
@@ -22,18 +22,6 @@ const { name, brand, vehicleBrand, description, image } = product.data;
 
 const whatsappNumber = "573116001851";
 const whatsappMessage = encodeURIComponent(`Hola Electrolujos, quiero información sobre: ${name}`);
-
-const optimizedImage = await getImage({ src: image, width: 800, height: 800 });
-const imageUrl = new URL(optimizedImage.src, Astro.site ?? Astro.url.origin).toString();
-
-const productSchema = {
-	"@context": "https://schema.org",
-	"@type": "Product",
-	name,
-	image: imageUrl,
-	description,
-	brand: { "@type": "Brand", name: brand },
-};
 ---
 
 <Breadcrumbs items={breadcrumbItems} />
@@ -103,5 +91,3 @@ const productSchema = {
 		</div>
 	)
 }
-
-<script type="application/ld+json" set:html={JSON.stringify(productSchema)} is:inline />
