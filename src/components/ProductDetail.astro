@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import Breadcrumbs from "./Breadcrumbs.astro";
 import ProductCard from "./ProductCard.astro";
+import { productTypeIntro } from "../lib/seo";
 
 interface Crumb {
 	label: string;
@@ -18,7 +19,8 @@ interface Props {
 }
 
 const { product, breadcrumbItems, backHref, backLabel, related } = Astro.props;
-const { name, brand, vehicleBrand, description, image } = product.data;
+const { name, brand, vehicleBrand, description, image, productType } = product.data;
+const typeIntro = productTypeIntro(productType);
 
 const whatsappNumber = "573116001851";
 const whatsappMessage = encodeURIComponent(`Hola Electrolujos, quiero informaci√≥n sobre: ${name}`);
@@ -56,6 +58,8 @@ const whatsappMessage = encodeURIComponent(`Hola Electrolujos, quiero informaci√
 		}
 
 		<p class="font-body text-cream-dim">{description}</p>
+
+		{typeIntro && <p class="font-body text-sm text-cream-dim/80">{typeIntro}</p>}
 
 		<a
 			href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
