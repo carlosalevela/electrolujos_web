@@ -52,12 +52,12 @@ const related = allProducts
 				product={product}
 				breadcrumbItems={[
 					{ label: "Inicio", href: "/" },
-					{ label: "Productos", href: "/productos" },
-					{ label: "Repuestos", href: "/productos/repuestos" },
-					{ label: activeSubcategoryLabel, href: `/productos/repuestos/${activeSubcategory}` },
+					{ label: "Productos", href: "/productos/" },
+					{ label: "Repuestos", href: "/productos/repuestos/" },
+					{ label: activeSubcategoryLabel, href: `/productos/repuestos/${activeSubcategory}/` },
 					{ label: product.data.name },
 				]}
-				backHref={`/productos/repuestos/${activeSubcategory}`}
+				backHref={`/productos/repuestos/${activeSubcategory}/`}
 				backLabel={`Volver a ${activeSubcategoryLabel}`}
 				related={related}
 			/>

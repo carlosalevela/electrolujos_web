@@ -28,9 +28,9 @@ const accesoriosSubcategories = [
 export function productUrl(product: CollectionEntry<"products">): string {
 	const { category, productType } = product.data;
 	if (category === "bombilleria-led" || category === "bombilleria-halogena") {
-		return `/productos/${category}/${product.id}`;
+		return `/productos/${category}/${product.id}/`;
 	}
-	return `/productos/${category}/${productType}/${product.id}`;
+	return `/productos/${category}/${productType}/${product.id}/`;
 }
 
 export type SidebarItem = {
@@ -58,11 +58,11 @@ function buildSubcategory(
 	const firstAvailable = subcategories.find((s) => countSub(s.id) > 0)?.id ?? subcategories[0].id;
 
 	return {
-		href: `/productos/${category}/${firstAvailable}`,
+		href: `/productos/${category}/${firstAvailable}/`,
 		subitems: subcategories.map((s) => ({
 			id: s.id,
 			label: s.label,
-			href: `/productos/${category}/${s.id}`,
+			href: `/productos/${category}/${s.id}/`,
 			count: countSub(s.id),
 			active: activeCategory === category && activeSubcategory === s.id,
 		})),
@@ -89,14 +89,14 @@ export function buildSidebar(
 		{
 			id: "bombilleria-led",
 			label: "Bombillería LED",
-			href: "/productos/bombilleria-led",
+			href: "/productos/bombilleria-led/",
 			count: countCategory("bombilleria-led"),
 			active: activeCategory === "bombilleria-led",
 		},
 		{
 			id: "bombilleria-halogena",
 			label: "Bombillería Halógena",
-			href: "/productos/bombilleria-halogena",
+			href: "/productos/bombilleria-halogena/",
 			count: countCategory("bombilleria-halogena"),
 			active: activeCategory === "bombilleria-halogena",
 		},

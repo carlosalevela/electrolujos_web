@@ -42,11 +42,11 @@ const related = allProducts
 				product={product}
 				breadcrumbItems={[
 					{ label: "Inicio", href: "/" },
-					{ label: "Productos", href: "/productos" },
-					{ label: activeCategoryLabel, href: `/productos/${activeCategory}` },
+					{ label: "Productos", href: "/productos/" },
+					{ label: activeCategoryLabel, href: `/productos/${activeCategory}/` },
 					{ label: product.data.name },
 				]}
-				backHref={`/productos/${activeCategory}`}
+				backHref={`/productos/${activeCategory}/`}
 				backLabel={`Volver a ${activeCategoryLabel}`}
 				related={related}
 			/>

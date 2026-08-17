@@ -4,5 +4,5 @@ import { getCollection } from "astro:content";
 const allProducts = await getCollection("products");
 const firstPopulated = allProducts.find((p) => p.data.category === "accesorios" && p.data.productType);
 
-return Astro.redirect(firstPopulated ? `/productos/accesorios/${firstPopulated.data.productType}` : "/productos", 301);
+return Astro.redirect(firstPopulated ? `/productos/accesorios/${firstPopulated.data.productType}/` : "/productos/", 301);
 ---

@@ -3,8 +3,8 @@ import { getCollection } from "astro:content";
 import { getImage } from "astro:assets";
 
 const topCategoryHrefs: Record<string, string> = {
-	"bombilleria-led": "/productos/bombilleria-led",
-	"bombilleria-halogena": "/productos/bombilleria-halogena",
+	"bombilleria-led": "/productos/bombilleria-led/",
+	"bombilleria-halogena": "/productos/bombilleria-halogena/",
 };
 
 export const GET: APIRoute = async () => {
@@ -15,8 +15,8 @@ export const GET: APIRoute = async () => {
 			const { name, brand, vehicleBrand, category, productType, image } = product.data;
 			const href =
 				category === "repuestos" || category === "accesorios"
-					? `/productos/${category}/${productType}`
-					: (topCategoryHrefs[category] ?? "/productos");
+					? `/productos/${category}/${productType}/`
+					: (topCategoryHrefs[category] ?? "/productos/");
 
 			const thumb = await getImage({ src: image, width: 64, height: 64 });
 
